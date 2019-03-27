@@ -77,6 +77,19 @@ function init() {
       acrossClue = document.getElementById("acrossID");
       downClue = document.getElementById("downID");
 
+      // Declaring the formatPuzzle function with currentLetter as the parameter and the following commands.
+      function formatPuzzle(currentLetter) {
+
+            // Looping through all items in the allLetters collection, the cursor's style will be turned into the pointer when passing any of them, and an event listener will act upon onmousedown with target as the object and formatPuzzle as the applied function.
+            for (var i = 0; i < allLetters.length; i++) {
+
+                  cursor.style = "pointer";
+
+                  target.addEventListener("onmousedown", formatPuzzle)
+            };
+
+      }
+
       // Sets typeimage to the elements with the ID of "directionImg"
       var typeImage = document.getElementById("directionImg");
 
@@ -88,6 +101,35 @@ function init() {
 
             switchTypeDirection();
 
+      }
+
+      // When the Show Errors button is clicked, the allLetter's items will be filtered to have any that do not equal the dataset.letter have their color set to red.
+      document.getElementById("showErrors").onclick(); {
+            for (var i = 0; i < allLetters.length; i++) {
+
+                  if (allLetter[i] != dataset.letter) {
+
+                        allLetters[i].style.color = "red";
+
+                  }
+
+                  setTimeout(() => {
+
+                        allLetters[i].style.color = "";
+
+                  }, 3000);
+
+            }
+      }
+
+      // A similar function is done here when the Show Solution button is clicked to have all items in allLetters have their value set to the dataset.letter.  
+      document.getElementById("showSolution").onclick(); {
+
+            for (var i = 0; i < allLetters.length; i++) {
+
+                  allLetters[i] = dataset.letter;
+
+            }
       }
 
 
@@ -158,22 +200,6 @@ if (typeDirection = "right") {
       currentLetter.style.backgroundColor = "rgb(255, 191, 191)"
 }
 
-// The init functions result is returned back into the document.
-return init(formatPuzzle);
-
-// Declaring the formatPuzzle function with currentLetter as the parameter and the following commands.
-function formatPuzzle(currentLetter) {
-
-      // Looping through all items in the allLetters collection, the cursor's style will be turned into the pointer when passing any of them, and an event listener will act upon onmousedown with target as the object and formatPuzzle as the applied function.
-      for (var i = 0; i < allLetters.length; i++) {
-
-            cursor.style = "pointer";
-
-            target.addEventListener("onmousedown", formatPuzzle)
-      };
-
-}
-
 // Declaring the selectLetter function for use.
 function selectLetter() {
 
@@ -226,9 +252,6 @@ function selectLetter() {
 
 }
 
-// Returns the result of the init function.
-return init();
-
 // Adds an event "keydown" for when the selectLetter functin runs.
 target.addEventListener("keydown", selectLetter)
 
@@ -256,7 +279,6 @@ function switchTypeDirection() {
       }
 
 }
-
 
 
 /*====================================================*/
