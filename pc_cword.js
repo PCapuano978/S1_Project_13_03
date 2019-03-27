@@ -77,6 +77,20 @@ function init() {
       acrossClue = document.getElementById("acrossID");
       downClue = document.getElementById("downID");
 
+      // Sets typeimage to the elements with the ID of "directionImg"
+      var typeImage = document.getElementById("directionImg");
+
+      // Changes the image style of the cursor to the pointer.
+      cursor.style.src = "pointer";
+
+      // If the typeImage is clicked on, the switchTypeDirection function will play out.
+      if (typeImage.click) {
+
+            switchTypeDirection();
+
+      }
+
+
 }
 
 // Created the function "formatPuzzle" with the parameter of "puzzleLetter"
@@ -160,6 +174,88 @@ function formatPuzzle(currentLetter) {
 
 }
 
+// Declaring the selectLetter function for use.
+function selectLetter() {
+
+      // The followingg variables are set to the referenced variables to the left, above, right, and bellow what the current letter is selected.
+      var leftLetter = currentLetter.dataset.left,
+            upLetter = currentLetter.dataset.up,
+            rightLetter = currentLetter.dataset.right,
+            downLetter = currentLetter.dataset.down;
+
+      // Variable "userKey" is set to store the code of the key pressed to the user by returning the tager of the keyCode attribute.
+      var userKey = target.keyCode;
+
+      // A bunch of conditional statements are inputted in here to make sure all userkey inputs are treated correctly, such as the arrow keys, and letters with their functions.
+      if (userKey = 37) {
+            formatPuzzle(leftLetter);
+      }
+
+      if (userKey = 38) {
+            formatPuzzle(upLetter);
+      }
+
+      if (userKey = 39 || 9) {
+            formatPuzzle(rightLetter);
+      }
+
+      if (userKey = 40 || 13) {
+            formatPuzzle(downLetter);
+      }
+
+      if (userKey = 8 || 46) {
+            $(currentLetter).remove();
+      }
+
+      if (userKey = 32) {
+            switchTypeDirection();
+      }
+
+      if (userKey = 65 || 66 || 67 || 68 || 69 || 70 || 71 || 72 || 73 || 74 || 75 || 76 || 77 || 78 || 79 || 80 || 81 || 82 || 83 || 84 || 85 || 86 || 87 || 88 || 89 || 90) {
+            currentLetter = getChar(userKey)
+      }
+
+      if (typeDirection = "right") {
+            formatPuzzle(rightLetter);
+      } else {
+            formatPuzzle(downLetter);
+      }
+
+      // Preventing the browser from performing a default action after a response from the keyboard events.
+      keyboard.preventDefault();
+
+}
+
+// Returns the result of the init function.
+return init();
+
+// Adds an event "keydown" for when the selectLetter functin runs.
+target.addEventListener("keydown", selectLetter)
+
+// switchTypeDirection is finally defined.
+function switchTypeDirection() {
+
+      // The local variable of typeImage is set to the elements with the ID of "directionImg".
+      var typeImage = document.getElementById("directionImg");
+
+      // if the typeDirection is right, then it will then be set to down, have the image src set to the right image, and then the background color set to a shade of red.
+      if (typeDirection = "right") {
+
+            typeDirection = "down";
+            src.typeImage = "pc_right.png";
+            currentLetter.style.backgroundColor = "rgb(255, 191, 191)";
+
+
+            // If not however, it's typeDirection will be set to right, the src image will be set to be the down image, and the background color will become a shade of blue.
+      } else {
+
+            typeDirection = "right";
+            src.typeImage = "pc_down.png";
+            currentLetter.style.backgroundColor = "rgb(191, 191, 255)";
+
+      }
+
+}
 
 
 
